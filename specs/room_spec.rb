@@ -10,8 +10,8 @@ require_relative("../guest")
 class RoomTest < MiniTest::Test
 
   def setup
-    @room1 = Room.new("The Green Room", 15, )
-    @room2 = Room.new("The Orange Room", 3, )
+    @room1 = Room.new("The Green Room", 15, 20)
+    @room2 = Room.new("The Orange Room", 3, 50 )
 
     @guest1 = Guest.new("Gabi", "Psycho Killer", "70's", 80)
     @guest2 = Guest.new("Kristiina", "Creep", "Radiohead", 50)
@@ -36,7 +36,12 @@ class RoomTest < MiniTest::Test
     assert_equal(15, @room1.empty_seats)
   end
 
+  def test_off_peak_room_fee
+    assert_equal(20, @room1.room_fee)
+  end
+
   def test_on_peak_room_fee
+    @room1.charge_on_peak_room_fee
     assert_equal(30, @room1.room_fee)
   end
 
@@ -107,5 +112,10 @@ class RoomTest < MiniTest::Test
   def test_guest_wallet_amount
     assert_equal(80, @guest1.wallet)
   end
+
+  # def test_charge_room_fee
+  #   assert_equal()
+  #   assert_equal()
+  # end
 
 end

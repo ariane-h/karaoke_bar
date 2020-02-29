@@ -2,15 +2,20 @@ require('pry-byebug')
 
 class Room
 
-  attr_accessor :guests, :playlist, :empty_seats
+  attr_accessor :guests, :playlist, :empty_seats, :room_till
   attr_reader :name, :room_fee
 
-  def initialize(name, empty_seats)
+  def initialize(name, empty_seats, room_fee)
       @name = name
       @empty_seats = empty_seats
       @guests = []
       @playlist = []
-      @room_fee = 30
+      @room_fee = room_fee
+      @room_till = 0
+  end
+
+  def charge_on_peak_room_fee
+      @room_fee += 10
   end
 
   #guest functions
