@@ -2,7 +2,7 @@ require('pry-byebug')
 
 class Room
 
-  attr_accessor :guests, :playlist, :empty_seats, :room_till
+  attr_accessor :guests, :playlist, :empty_seats, :till
   attr_reader :name, :room_fee
 
   def initialize(name, empty_seats, room_fee)
@@ -11,11 +11,13 @@ class Room
       @guests = []
       @playlist = []
       @room_fee = room_fee
-      @room_till = 0
+      @till = 0
   end
 
-  def charge_on_peak_room_fee
-      @room_fee += 10
+
+  def charge_room_fee(guest)
+    guest.wallet -= @room_fee
+    @till += @room_fee
   end
 
   #guest functions

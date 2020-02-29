@@ -36,13 +36,14 @@ class RoomTest < MiniTest::Test
     assert_equal(15, @room1.empty_seats)
   end
 
-  def test_off_peak_room_fee
+  def test_get_room_fee
     assert_equal(20, @room1.room_fee)
   end
 
-  def test_on_peak_room_fee
-    @room1.charge_on_peak_room_fee
-    assert_equal(30, @room1.room_fee)
+  def test_charge_room_fee
+    @room2.charge_room_fee(@guest1)
+    assert_equal(30, @guest1.wallet)
+    assert_equal(50, @room2.till)
   end
 
   #playlist tests
@@ -72,7 +73,8 @@ class RoomTest < MiniTest::Test
     assert_equal(7, @room1.playlist_count)
   end
 
-  # check in/out tests
+  # check guest in/out tests
+
   def test_count_guests_in_room
     assert_equal(0, @room1.count_guests_in_room)
   end
@@ -112,10 +114,5 @@ class RoomTest < MiniTest::Test
   def test_guest_wallet_amount
     assert_equal(80, @guest1.wallet)
   end
-
-  # def test_charge_room_fee
-  #   assert_equal()
-  #   assert_equal()
-  # end
 
 end
