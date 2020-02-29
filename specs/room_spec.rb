@@ -25,4 +25,14 @@ class RoomTest < MiniTest::Test
     assert_equal(30, @room1.room_fee)
   end
 
+  def test_playlist_empty?
+    assert_equal(true, @playlist.nil?)
+  end
+
+
+    # def test_add_song_to_playlist
+    #   add_song_to_playlist(@song5)
+    #   assert_equal(5, @playlist.count)
+    # end
+
 end

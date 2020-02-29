@@ -11,10 +11,14 @@ class Room
   end
 
 
+  def playlist_length
+    return @playlist.count
+  end
 
+  def test_playlist_empty?
+    assert_equal(true, @playlist.nil?)
+  end
 
-
-
-
+  
 
 end
