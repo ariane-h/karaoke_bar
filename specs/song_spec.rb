@@ -5,6 +5,7 @@ require('minitest/reporters')
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative("../song")
+require_relative("../room")
 
 class SongTest < MiniTest::Test
 
@@ -31,6 +32,5 @@ class SongTest < MiniTest::Test
     assert_equal("60's", @song1.song_genre)
     assert_equal("90's", @song4.song_genre)
   end
-
 
 end
