@@ -2,16 +2,16 @@ require('pry-byebug')
 
 class Room
 
-  attr_accessor :seats, :playlist
+  attr_accessor :guests, :playlist, :empty_seats
   attr_reader :name, :room_fee
 
-  def initialize(name, seats)
+  def initialize(name, empty_seats)
       @name = name
-      @seats = seats
+      @empty_seats = empty_seats
+      @guests = []
       @playlist = []
       @room_fee = 30
   end
-
 
   #playlist functions - add song to room
 
@@ -26,6 +26,14 @@ class Room
   def load_existing_playlist(existing_playlist)
     @playlist = existing_playlist.map {|song| @playlist << song }
     return @playlist
+  end
+
+  def count_guests_in_room
+    return @guests.count
+  end
+
+  def check_in_guest(new_guest)
+    @guests.push(new_guest)
   end
 
 

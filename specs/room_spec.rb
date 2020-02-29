@@ -12,6 +12,8 @@ class RoomTest < MiniTest::Test
   def setup
     @room1 = Room.new("The Green Room", 15,  )
 
+    @guest1 = Guest.new("Gabbi", "Psycho Killer", "70's", 80)
+
     @song1 = Song.new({title: "Little Deuce Coupe", artist: "Beach Boys", genre: "60's"})
     @song2 = Song.new({title: "Psycho Killer", artist: "Talking Heads", genre: "70's"})
     @song3 = Song.new({title: "Head Over Heels", artist: "Tears for Fears", genre: "80's"})
@@ -29,12 +31,14 @@ class RoomTest < MiniTest::Test
   end
 
   def test_empty_seats
-    assert_equal(15, @room1.seats)
+    assert_equal(15, @room1.empty_seats)
   end
 
   def test_on_peak_room_fee
     assert_equal(30, @room1.room_fee)
   end
+
+  #playlist tests
 
   def test_playlist_starts_empty?
     assert_equal(true, @playlist.nil?)
@@ -61,5 +65,14 @@ class RoomTest < MiniTest::Test
     assert_equal(7, @room1.playlist_count)
   end
 
+  # check in/out tests
+  def test_count_guests_in_room
+    assert_equal(0, @room1.count_guests_in_room)
+  end
+
+  def test_check_in_guest
+    @room1.check_in_guest(@guest1)
+    assert_equal(1, @room1.count_guests_in_room)
+  end
 
 end
