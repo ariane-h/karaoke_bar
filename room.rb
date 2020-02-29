@@ -13,6 +13,30 @@ class Room
       @room_fee = 30
   end
 
+  #guest functions
+
+  def count_guests_in_room
+    return @guests.count
+  end
+
+  def remove_empty_seat
+    @empty_seats -= 1
+    return @empty_seats
+  end
+
+  def check_in_guest(new_guest)
+    if @empty_seats >= 1
+      @guests << new_guest
+      remove_empty_seat()
+    end
+    return @guests.count
+    return @empty_seats
+  end
+
+  def check_out_guest(guest)
+    @guests.delete(guest)
+  end
+
   #playlist functions - add song to room
 
   def playlist_count
@@ -20,24 +44,12 @@ class Room
   end
 
   def add_song_to_playlist(song)
-   @playlist.push(song)
+    @playlist.push(song)
   end
 
   def load_existing_playlist(existing_playlist)
     @playlist = existing_playlist.map {|song| @playlist << song }
     return @playlist
-  end
-
-  def count_guests_in_room
-    return @guests.count
-  end
-
-  def check_in_guest(new_guest)
-    @guests.push(new_guest)
-  end
-
-  def check_out_guest(guest)
-    @guests.delete(guest)
   end
 
 

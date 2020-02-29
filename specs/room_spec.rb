@@ -10,7 +10,8 @@ require_relative("../guest")
 class RoomTest < MiniTest::Test
 
   def setup
-    @room1 = Room.new("The Green Room", 15,  )
+    @room1 = Room.new("The Green Room", 15, )
+    @room2 = Room.new("The Orange Room", 3, )
 
     @guest1 = Guest.new("Gabbi", "Psycho Killer", "70's", 80)
 
@@ -72,7 +73,7 @@ class RoomTest < MiniTest::Test
 
   def test_check_in_guest
     @room1.check_in_guest(@guest1)
-    assert_equal(1, @room1.count_guests_in_room)
+    assert_equal(1, @room1.guests.count)
   end
 
   def test_check_out_guest
@@ -85,6 +86,21 @@ class RoomTest < MiniTest::Test
     @room1.check_in_guest(@guest1)
     @room1.check_in_guest(@guest1)
     assert_equal(3, @room1.count_guests_in_room)
+  end
+
+  def test_check_in_guest
+    @room2.check_in_guest(@guest1)
+    @room2.check_in_guest(@guest1)
+    @room2.check_in_guest(@guest1)
+    @room2.check_in_guest(@guest1)
+    @room2.check_in_guest(@guest1)
+    assert_equal(0, @room2.empty_seats)
+    assert_equal(3, @room2.guests.count)
+  end
+
+  def test_remove_empty_seat
+    @room2.remove_empty_seat()
+    assert_equal(2, @room2.empty_seats)
   end
 
 end
