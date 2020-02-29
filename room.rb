@@ -14,13 +14,21 @@ class Room
       @till = 0
   end
 
+  #guest functions
 
   def charge_room_fee(guest)
-    guest.wallet -= @room_fee
-    @till += @room_fee
+      guest.wallet -= @room_fee
+      @till += @room_fee
   end
 
-  #guest functions
+  def can_guest_afford(guest)
+      if guest.wallet >= @room_fee
+        return true
+      else
+        puts "Sorry, #{guest.name} you can't afford this room"
+        return false
+      end
+  end
 
   def count_guests_in_room
     return @guests.count
@@ -31,6 +39,8 @@ class Room
   end
 
   def check_in_guest(new_guest)
+    can_guest_afford(new_guest)
+    charge_room_fee(new_guest)
     if @empty_seats >= 1
       @guests << new_guest
       remove_empty_seat()
