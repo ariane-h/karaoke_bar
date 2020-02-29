@@ -13,7 +13,9 @@ class RoomTest < MiniTest::Test
     @room1 = Room.new("The Green Room", 15, )
     @room2 = Room.new("The Orange Room", 3, )
 
-    @guest1 = Guest.new("Gabbi", "Psycho Killer", "70's", 80)
+    @guest1 = Guest.new("Gabi", "Psycho Killer", "70's", 80)
+    @guest2 = Guest.new("Kristiina", "Creep", "Radiohead", 50)
+    @guest3 = Guest.new("Jim", "Little Deuce Coupe", "60's", 20)
 
     @song1 = Song.new({title: "Little Deuce Coupe", artist: "Beach Boys", genre: "60's"})
     @song2 = Song.new({title: "Psycho Killer", artist: "Talking Heads", genre: "70's"})
@@ -22,7 +24,6 @@ class RoomTest < MiniTest::Test
     @song5 = Song.new({title: "In da Club", artist: "50 Cent", genre: "2000's"})
 
     @playlist1 = [@song1, @song3, @song5, @song1, @song2, @song4, @song1 ]
-
   end
 
   #getter tests
@@ -88,19 +89,23 @@ class RoomTest < MiniTest::Test
     assert_equal(3, @room1.count_guests_in_room)
   end
 
-  def test_check_in_guest
+  def test_remove_empty_seat
+    @room2.remove_empty_seat()
+    assert_equal(2, @room2.empty_seats)
+  end
+
+  def test_check_in_guest_not_enough_space
     @room2.check_in_guest(@guest1)
     @room2.check_in_guest(@guest1)
+    @room2.check_in_guest(@guest2)
     @room2.check_in_guest(@guest1)
-    @room2.check_in_guest(@guest1)
-    @room2.check_in_guest(@guest1)
+    @room2.check_in_guest(@guest2)
     assert_equal(0, @room2.empty_seats)
     assert_equal(3, @room2.guests.count)
   end
 
-  def test_remove_empty_seat
-    @room2.remove_empty_seat()
-    assert_equal(2, @room2.empty_seats)
+  def test_guest_wallet_amount
+    assert_equal(80, @guest1.wallet)
   end
 
 end

@@ -21,16 +21,15 @@ class Room
 
   def remove_empty_seat
     @empty_seats -= 1
-    return @empty_seats
   end
 
   def check_in_guest(new_guest)
     if @empty_seats >= 1
       @guests << new_guest
       remove_empty_seat()
+    else
+      puts "Sorry! #{new_guest.name} we're fully booked."
     end
-    return @guests.count
-    return @empty_seats
   end
 
   def check_out_guest(guest)
