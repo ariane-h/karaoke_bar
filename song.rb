@@ -14,6 +14,4 @@ class Song
     return @playlist.count
   end
 
-
-
 end
