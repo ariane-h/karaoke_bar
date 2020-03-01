@@ -12,11 +12,17 @@ class Guest
     @wallet = wallet
   end
 
-  def hears_favourite_song(song)
-    if song.song_title == @favourite_song
-      return "YASSS! This is my jaaam!"
+  def find_song_on_playlist(playlist, song)
+    result = playlist.find(song) && song.song_title == @favourite_song
+  end
+
+
+  def hears_favourite_song(room, playlist, song)
+    room.load_existing_playlist(playlist)
+    if find_song_on_playlist(playlist, song) == true
+      p "YASSS! This is my jaaam!"
     else
-      return "Next please"
+      p "Ah, it's not on the list"
     end
   end
 
