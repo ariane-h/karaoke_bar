@@ -30,6 +30,7 @@ class Room
       end
   end
 
+
   def count_guests_in_room
     return @guests.count
   end
@@ -68,5 +69,11 @@ class Room
     return @playlist
   end
 
+  def list_currently_playing(playlist)
+    @playlist = load_existing_playlist(playlist)
+    titles = playlist.map { |song| song.song_title }
+    p titles
+    titles.length
+  end
 
 end
